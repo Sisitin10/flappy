@@ -1,0 +1,41 @@
+name: Build Unsigned IPA & Release
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Archive
+        run: |
+          xcodebuild archive \
+            -project Flappy.xcodeproj \
+            -scheme Flappy \
+            -sdk iphoneos \
+            -archivePath build/Flappy.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY=""
+
+      - name: Package IPA
+        run: |
+          mkdir -p Payload
+          cp -r build/Flappy.xcarchive/Products/Applications/*.app Payload/
+          zip -r Flappy.ipa Payload
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v0.${{ github.run_number }}0"
+          name: "Release v0.${{ github.run_number }}0"
+          files: Flappy.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
