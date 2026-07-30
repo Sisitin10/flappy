@@ -21,6 +21,7 @@ jobs:
             -scheme Flappy \
             -sdk iphoneos \
             -archivePath build/Flappy.xcarchive \
+            IPHONEOS_DEPLOYMENT_TARGET=26.0 \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
