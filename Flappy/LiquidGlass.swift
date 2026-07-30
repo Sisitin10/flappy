@@ -66,7 +66,7 @@ public struct LiquidGlassCardStyle<S: Shape>: ViewModifier {
             .background(
                 Group {
                     if let tint = tintColor {
-                        shape.fill(tint.opacity(0.2))
+                        shape.fill(tint.opacity(0.15))
                             .background(.ultraThinMaterial, in: shape)
                     } else {
                         shape.fill(.ultraThinMaterial)
@@ -76,14 +76,14 @@ public struct LiquidGlassCardStyle<S: Shape>: ViewModifier {
             .overlay(
                 shape.stroke(
                     LinearGradient(
-                        colors: [.white.opacity(0.8), .white.opacity(0.2)],
+                        colors: [.white.opacity(0.6), .white.opacity(0.15)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ),
-                    lineWidth: 1
+                    lineWidth: 0.75
                 )
             )
-            .shadow(color: .black.opacity(0.08), radius: 10, x: 0, y: 5)
+            .shadow(color: .black.opacity(0.04), radius: 6, x: 0, y: 3)
     }
 }
 

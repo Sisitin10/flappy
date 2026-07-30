@@ -22,33 +22,47 @@ struct GameView: View {
             
             // HUD Overlay
             VStack {
-                HStack {
-                    Text("Score: \(score)")
-                        .font(.system(.title3, design: .monospaced))
-                        .bold()
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .glassEffect(in: Capsule())
-                    
-                    Spacer()
-                    
-                    HStack(spacing: 4) {
-                        Image(systemName: "centsign.circle.fill")
-                        Text("\(coins)")
-                            .font(.system(.body, design: .monospaced))
-                            .bold()
+                HStack(spacing: 12) {
+                    // Score Display
+                    HStack(spacing: 6) {
+                        Text("SCORE")
+                            .font(.system(size: 10, weight: .bold, design: .rounded))
+                            .foregroundColor(.secondary)
+                        Text("\(score)")
+                            .font(.system(size: 18, weight: .bold, design: .monospaced))
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 8)
-                    .background(Color.amber)
-                    .foregroundColor(.white)
-                    .clipShape(Capsule())
+                    .glassEffect(in: Capsule())
+                    
+                    Spacer()
+                    
+                    // Coins counter
+                    HStack(spacing: 4) {
+                        Image(systemName: "centsign.circle.fill")
+                            .foregroundColor(.amber)
+                        Text("\(coins)")
+                            .font(.system(size: 14, weight: .bold, design: .monospaced))
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .glassEffect(in: Capsule())
+                    
+                    // Shop Button
+                    Button(action: onOpenShop) {
+                        Image(systemName: "bag.fill")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(.primary)
+                            .padding(10)
+                    }
+                    .glassEffect(.prominent, in: Circle())
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 50)
+                .padding(.horizontal, 16)
+                .padding(.top, 52)
                 
                 Spacer()
             }
         }
     }
 }
+
